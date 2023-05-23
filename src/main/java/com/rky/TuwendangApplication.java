@@ -3,6 +3,8 @@ package com.rky;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
+//@ServletComponentScan   //为了使用filter
 @SpringBootApplication
 public class TuwendangApplication {
 
