@@ -17,6 +17,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void add(Project project) {
         project.setUpdateTime(LocalDateTime.now());
+        project.setCreateTime(LocalDateTime.now());
         projectMapper.add(project);
     }
 }

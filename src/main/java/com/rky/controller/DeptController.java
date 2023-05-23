@@ -5,8 +5,7 @@ import com.rky.pojo.Result;
 import com.rky.service.DeptService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,12 +26,24 @@ public class DeptController {
 
 
     /*修改部门信息 根据id*/
-
+    @PutMapping("/depts/update")
+    public Result updata(@RequestBody Dept dept){
+        deptService.updata(dept);
+        return  Result.success();
+    }
 
     /*新建部门*/
 
+    @PostMapping("/depts/add")
+    public Result add(@RequestBody Dept dept){
 
-    /*删除部门*/
+        deptService.add(dept);
+        return  Result.success();
+    }
+
+    /*多选删除部门  删除单个一样可以使用*/
+
+
 
 
 
