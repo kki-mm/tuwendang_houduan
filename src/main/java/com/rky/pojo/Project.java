@@ -35,7 +35,7 @@ public class Project {
     private String fax;
     private String sendUnit;
     private String sendCondition;
-    private LocalDateTime timeBy;
+    private LocalDateTime timeDy;
     private LocalDateTime timeSb;
     private LocalDateTime updateTime;
 

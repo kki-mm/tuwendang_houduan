@@ -42,7 +42,7 @@ public class DeptController {
     }
 
     /*多选删除部门  删除单个一样可以使用*/
-
+            //一会写
 
 
 
