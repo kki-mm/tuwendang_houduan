@@ -23,6 +23,13 @@ public class ProjectController {
         return Result.success();  //需不需要返回新建的项目id呢？？
     }
 
+
+
+    /*新建员工后，要更新项目人员表  项目审批人表 */
+
+
+
+
     /*分页查询所有项目*/
     @GetMapping("projects/selectPage")
     public Result selectPage(Integer start,Integer pageSize){
@@ -53,6 +60,9 @@ public class ProjectController {
         projectService.delete(ids);
         return Result.success();
     }
+
+
+
 
 
 }
