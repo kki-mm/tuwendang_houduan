@@ -73,6 +73,39 @@
             <artifactId>fastjson</artifactId>
             <version>1.2.76</version>
         </dependency>
+
+        <!--word convert pdf jar -->
+        <dependency>
+            <groupId>com.aspose</groupId>
+            <artifactId>aspose-words</artifactId>
+            <version>jdk16</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/UtilsJar/Aspose.Words-jdk16.jar</systemPath>
+        </dependency>
+
+     <!--   <dependency>
+            <groupId>aspose-cells</groupId>
+            <artifactId>aspose</artifactId>
+            <version>8.5.2</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/UtilsJar/aspose-cells-8.5.2.jar</systemPath>
+        </dependency>-->
+
+        <dependency>
+            <groupId>com.aspose</groupId>
+            <artifactId>aspose-cells</artifactId>
+            <version>22.8</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/UtilsJar/aspose-cells-22.8.jar</systemPath>
+        </dependency>
+
+        <dependency>
+            <groupId>com.aspose</groupId>
+            <artifactId>aspose-cad</artifactId>
+            <version>19.5</version>
+            <scope>system</scope>
+            <systemPath>${basedir}/src/main/resources/UtilsJar/aspose-cad-19.5-pj.jar</systemPath>
+        </dependency>
     </dependencies>
 
     <build>

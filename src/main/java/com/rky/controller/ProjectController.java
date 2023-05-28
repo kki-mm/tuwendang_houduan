@@ -25,8 +25,11 @@ public class ProjectController {
 
 
 
-    /*新建员工后，要更新项目人员表  项目审批人表 */
-
+    /*新建员工后*/
+    /*
+    *   1. add 人员项目表 project_person
+    *   2. add 项目审批人员表 project_approve
+    * */
 
 
 
@@ -53,6 +56,11 @@ public class ProjectController {
         projectService.update(project);
         return Result.success();
     }
+    /*
+    * 修改项目限定不能修改项目成员，修改审批人员，添加按钮来增加项目成员。
+    * 1.更新项目成员表
+    * 2.更新审批人表
+    * */
 
     /*根据id 删除项目 多选*/
     @DeleteMapping("projects/delete/{ids}")

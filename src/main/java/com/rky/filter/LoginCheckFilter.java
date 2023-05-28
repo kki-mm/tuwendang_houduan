@@ -29,6 +29,18 @@ public class LoginCheckFilter implements Filter {
             filterChain.doFilter(request,response);
             return;
         }
+        if(url.contains("/index.html")){
+            log.info("主页面，放行");
+            filterChain.doFilter(request,response);
+            return;
+        }
+
+        if(url.contains("/js")||url.contains("/css")||url.contains("/favicon.ico")){
+            log.info("主页面，放行");
+            filterChain.doFilter(request,response);
+            return;
+        }
+
         //3.判断是否有token
         String jwt = request.getHeader("token");
         if(!StringUtils.hasLength(jwt)){
