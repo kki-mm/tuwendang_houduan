@@ -7,7 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.InputStream;
+import java.time.LocalDate;
+
 import com.rky.utils.Word2PdfUtil;
 
 import static com.rky.utils.Word2PdfUtil.doc2pdf;
@@ -52,6 +55,25 @@ public class UploadServiceImpl implements UploadService {
             log.info("start to convert cad to pdf");
             Dwg2Pdf(inputStream,fileSavePathPdf);
         }
+    }
+
+    @Override
+    public String createFolder(String workPath, String depart, String projectId, String room, String fileClass) {
+        String depart_name = depart;//部门名称
+        LocalDate localDate = LocalDate.now();
+        String Year = String.valueOf(localDate.getYear());
+        String Month = String.valueOf(localDate.getMonth());
+        String project = projectId;//项目id
+        String roomName = room;//室
+        String className = fileClass;//资料类型
+        String src_path = workPath+"//"+depart_name+"//"+Year+"//"+Month+"//"+project+"//"+roomName+"//"+fileClass+"//"+"src";
+        String pdf_path = workPath+"//"+depart_name+"//"+Year+"//"+Month+"//"+project+"//"+roomName+"//"+fileClass+"//"+"pdf";
+        String returnPath = workPath+"//"+depart_name+"//"+Year+"//"+Month+"//"+project+"//"+roomName+"//"+fileClass;
+        File file = new File(src_path);
+        File file2 = new File(pdf_path);
+        file.mkdirs();
+        file2.mkdirs();
+        return returnPath;
     }
 }
 

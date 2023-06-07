@@ -23,20 +23,24 @@ public class UploadController {
 
     @PostMapping("/upload")
     //需要给一个flag ,是否需要转pdf
-    public Result loadFile(MultipartFile file,boolean need_pdf)throws Exception{
+    public Result loadFile(MultipartFile file,boolean need_pdf,String departName,String projectId,String roomName,String fileClass)throws Exception{
 
         //1. 得到后缀名称
         String fileClassName = uploadService.getClass(file);
 
         //2.设计文件保存地址与名字
         //获取uuid 拼接保存名称
+
+        //前端传入 项目id 部门id
+        //部门--->时间文件夹（按年、月自动生成）--->项目文件夹（项目令号）--->资料类型--->src/pdf
         String uuid = UUID.randomUUID().toString();
         //文件保存地址逻辑
-        String fileSavePath = "E:\\rky\\FILESAVE\\";
-        //源文件保存地址
-        String fileSavePathSrc = fileSavePath+uuid+fileClassName;
+        String workPath = "E://rky//FILESAVE";
+        //源文件保存地址  创建文件夹
+        String basePath = uploadService.createFolder(workPath,departName,projectId,roomName,fileClass);
+        String fileSavePathSrc = basePath+"//src//"+uuid+fileClassName;
         //pdf 文件保存地址
-        String fileSavePathPdf = fileSavePath+uuid+".pdf";
+        String fileSavePathPdf = basePath+"//pdf//"+uuid+".pdf";
 
 
         //3.进行pdf文件格式转换并保存
