@@ -1,17 +1,19 @@
 package com.rky.controller;
 
-import com.rky.pojo.Result;
+//import com.alibaba.fastjson.util.IOUtils;
+import org.apache.commons.io.IOUtils;
 import com.rky.service.DownloadService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import org.springframework.web.bind.annotation.*;
-
-
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.net.URLEncoder;
 
+//import org.apache.commons.io.IOUtils;
 
 @RestController
 @Slf4j
@@ -52,4 +54,23 @@ public class DownloadController {
        // return Result.success("下载成功");
     }
 
+
+    @GetMapping("/preview")
+    public void preview(String path,HttpServletResponse response)  {
+        try{
+            ServletOutputStream outputStream = response.getOutputStream();
+            InputStream in = new FileInputStream(new File(path));  //pdf输入流
+            int i = IOUtils.copy(in,outputStream);
+            in.close();
+            outputStream.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+    }
+
 }
+
+
+
