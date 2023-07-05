@@ -1,13 +1,11 @@
 package com.rky.controller;
 
+import com.rky.pojo.Filee;
 import com.rky.pojo.Result;
 import com.rky.service.UploadService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -23,12 +21,15 @@ public class UploadController {
 
 
     @PostMapping("/upload")
-    //需要给一个flag ,是否需要转pdf
-    public Result loadFile(MultipartFile file,boolean need_pdf,String departName,String projectId,String roomName,String fileClass)throws Exception{
+//    @ResponseBody
+    public Result loadFile(@RequestParam("file")MultipartFile file,boolean need_pdf,String departName,String projectId,String projectName,String roomName,String fileClass,@RequestPart(value = "filee") Filee filee)throws Exception{
 
         //1. 得到后缀名称
         String fileClassName = uploadService.getClass(file);
-
+         // 得到文件大小
+        long fileSize = uploadService.getSize(file);
+        // 转换文件大小单位
+        String fileSizeDanwei = uploadService.getSizeDanwei(fileSize);
         //2.设计文件保存地址与名字
         //获取uuid 拼接保存名称
 
@@ -38,10 +39,11 @@ public class UploadController {
         //文件保存地址逻辑
         String workPath = "E://rky//FILESAVE";
         //源文件保存地址  创建文件夹
-        String basePath = uploadService.createFolder(workPath,departName,projectId,roomName,fileClass);
+        String basePath = uploadService.createFolder(workPath,departName,projectId,projectName,roomName,fileClass);
         String fileSavePathSrc = basePath+"//src//"+uuid+fileClassName;
         //pdf 文件保存地址
-        String fileSavePathPdf = basePath+"//pdf//"+uuid+".pdf";
+        String fileSavePathPdf = basePath + "//pdf//" + uuid + ".pdf";
+
 
 
         //3.进行pdf文件格式转换并保存
@@ -55,7 +57,8 @@ public class UploadController {
         file.transferTo(new File(fileSavePathSrc));
 
         //4.更新文件--项目 表
-
+        uploadService.add(fileSizeDanwei,fileClassName,fileSavePathSrc,fileSavePathPdf,filee);
+        log.info(fileSavePathSrc);
 
         //5.想办法返回在线预览地址
 

@@ -19,11 +19,13 @@ import java.net.URLEncoder;
 @Slf4j
 public class DownloadController {
 
-    @Autowired
-    DownloadService downloadService;
+    //@Autowired
+    //DownloadService downloadService;
 
     @GetMapping("/download")
     public void download(String path, HttpServletResponse response) {
+//判断是否能下载
+        //调用sxs函数
         try {
             File file = new File(path);
             log.info(file.getPath());

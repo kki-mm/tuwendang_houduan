@@ -14,5 +14,5 @@ public interface ProjectService {
 
     void update(Project project);
 
-    void delete(List<Integer> ids);
+    void delete(List<String> ids);
 }

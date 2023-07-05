@@ -78,9 +78,9 @@
         <dependency>
             <groupId>com.aspose</groupId>
             <artifactId>aspose-words</artifactId>
-            <version>jdk16</version>
+            <version>21.1</version>
             <scope>system</scope>
-            <systemPath>${basedir}/src/main/resources/UtilsJar/Aspose.Words-jdk16.jar</systemPath>
+            <systemPath>${basedir}/src/main/resources/UtilsJar/aspose-words-21.1-jdk17.jar</systemPath>
         </dependency>
 
      <!--   <dependency>

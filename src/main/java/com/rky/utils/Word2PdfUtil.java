@@ -1,7 +1,7 @@
 package com.rky.utils;
 
 import com.aspose.words.Document;
-import com.aspose.words.License;
+
 import com.aspose.words.SaveFormat;
 
 import java.io.File;
@@ -16,20 +16,20 @@ import java.io.InputStream;
  * @see
  */
 public class Word2PdfUtil {
- 
 
-    public static boolean getLicense() {
-        boolean result = false;
-        try {
-            InputStream is = Word2PdfUtil.class.getClassLoader().getResourceAsStream("\\license.xml");
-            com.aspose.cells.License aposeLic = new com.aspose.cells.License();
-            aposeLic.setLicense(is);
-            result = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
+
+//    public static boolean getLicense() {
+//        boolean result = false;
+//        try {
+//            InputStream is = Word2PdfUtil.class.getClassLoader().getResourceAsStream("\\license.xml");
+//            com.aspose.cells.License aposeLic = new com.aspose.cells.License();
+//            aposeLic.setLicense(is);
+//            result = true;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return result;
+//    }
     /**
      * word 转为pdf 输出。
      */
@@ -54,9 +54,9 @@ public class Word2PdfUtil {
 */
     //自己修改的函数
     public static void doc2pdf(InputStream inputStream, String savePath) {
-        if (!getLicense()) { // 验证License 若不验证则转化出的pdf文档会有水印产生
-            return;
-        }
+//        if (!getLicense()) { // 验证License 若不验证则转化出的pdf文档会有水印产生
+//            return;
+//        }
         try {
           //  long old = System.currentTimeMillis();
             File file = new File(savePath); // 新建一个空白pdf文档
@@ -74,3 +74,5 @@ public class Word2PdfUtil {
 
 
 }
+
+

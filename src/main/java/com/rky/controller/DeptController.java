@@ -28,6 +28,7 @@ public class DeptController {
     /*修改部门信息 根据id*/
     @PutMapping("/depts/update")
     public Result updata(@RequestBody Dept dept){
+        log.info("start to test updata *****   sxs ");
         deptService.updata(dept);
         return  Result.success();
     }

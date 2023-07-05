@@ -25,5 +25,5 @@ public interface ProjectMapper {
     @Update("update project set project_name=#{projectName},project_id=#{projectId},project_create=#{projectCreate},project_members=#{projectMembers},project_approves=#{projectApproves},document_type=#{documentType},contract_date=#{contractDate},sale_manager=#{saleManager},contract_money=#{contractMoney},design_manager=#{designManager},serve_person=#{servePerson},deliver_way=#{deliverWay},order_unit=#{orderUnit},receive_unit=#{receiveUnit},receive_address=#{receiveAddress},arrive_station=#{arriveStation},mail=#{mail},contact_people=#{contactPeople},contact_people_phone=#{contactPeoplePhone},fax=#{fax},send_unit=#{sendUnit},send_condition=#{sendCondition},time_dy=#{timeDy},time_sb=#{timeSb},update_time=#{updateTime} where project_id = #{projectId}")
     void update(Project project);
 
-    void delete(List<Integer> ids);
+    void delete(List<String> ids);
 }

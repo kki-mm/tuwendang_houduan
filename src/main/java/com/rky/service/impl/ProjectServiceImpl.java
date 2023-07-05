@@ -49,7 +49,7 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public void delete(List<Integer> ids) {
+    public void delete(List<String> ids) {
         projectMapper.delete(ids);
     }
 }

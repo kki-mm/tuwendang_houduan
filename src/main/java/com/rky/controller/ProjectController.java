@@ -20,6 +20,7 @@ public class ProjectController {
     @PostMapping("projects/add")
     public Result add(@RequestBody Project project){
         projectService.add(project);
+
         return Result.success();  //需不需要返回新建的项目id呢？？
     }
 
@@ -64,7 +65,8 @@ public class ProjectController {
 
     /*根据id 删除项目 多选*/
     @DeleteMapping("projects/delete/{ids}")
-    public Result delete(@PathVariable List<Integer> ids){
+    public Result delete(@PathVariable List<String> ids){
+        log.info("根据id删除部门：{}",ids);
         projectService.delete(ids);
         return Result.success();
     }
