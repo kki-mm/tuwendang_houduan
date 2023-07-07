@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public class Project {
     private String projectName;
     private String projectId;
+    private Integer departId;
     private String projectCreate;
     private LocalDateTime createTime;
     private LocalDateTime endTime;

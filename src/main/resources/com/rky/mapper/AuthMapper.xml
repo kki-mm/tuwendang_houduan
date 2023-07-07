@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.rky.mapper.AuthMapper">
+
+
+
+    <insert id="insert" parameterType="list">
+        insert into project_approve (
+        project_id,
+        person_1,
+        person_2
+        <if test="approveIds.size()==3">
+            ,person_3
+        </if>
+        <if test="approveIds.size()==4">
+            ,person_3,person_4
+        </if>
+        <if test="approveIds.size()==5">
+            ,person_3,person_4,person_5
+        </if>
+        ,create_time
+        ,update_time
+        )
+        values (
+        #{projectId},
+
+        <foreach collection="approveIds" item="id" separator=",">
+                #{id}
+        </foreach>
+        ,now()
+        ,now()
+         )
+    </insert>
+
+
+    <update id="updataStat">
+        update project_approve set
+        <if test="personFlag==1">
+            person_1_stat = #{result},
+            person_1_time = now(),
+        </if>
+        <if test="personFlag==2">
+            person_2_stat = #{result},
+            person_2_time = now(),
+        </if>
+        <if test="personFlag==3">
+            person_3_stat = #{result},
+            person_3_time = now(),
+        </if>
+        <if test="personFlag==4">
+            person_4_stat = #{result},
+            person_4_time = now(),
+        </if>
+        <if test="personFlag==5">
+            person_5_stat = #{result},
+            person_5_time = now(),
+        </if>
+            update_time=now()
+        where project_id = #{projectId} and id = #{id}
+    </update>
+</mapper>

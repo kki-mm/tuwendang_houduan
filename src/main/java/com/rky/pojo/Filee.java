@@ -14,7 +14,7 @@ public class Filee {
 
     private Integer id;
     private String projectId;
-    private String roomId;
+    private Integer roomId;
     private String fileId;
     private String fileName;
     private String fileType;
