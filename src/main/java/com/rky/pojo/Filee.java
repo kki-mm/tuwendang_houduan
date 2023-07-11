@@ -39,7 +39,7 @@ public class Filee {
     private Integer isPublish;
     private Integer isGiveOut;
 
-    private Double giveOutLife;
+    private LocalDateTime giveOutLife;
     private String note1;
     private String note2;
     private String note3;

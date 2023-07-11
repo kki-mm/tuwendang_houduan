@@ -58,4 +58,63 @@
             update_time=now()
         where project_id = #{projectId} and id = #{id}
     </update>
+    <update id="setFileAprrStat">
+        update file_approve
+        <set>
+          <if test="flag==1">
+            proof_person_stat = #{result},proof_person_time = now()
+          </if>
+          <if test="flag==2">
+            examine_person_stat = #{result},examine_person_time = now()
+          </if>
+          <if test="flag==3">
+            approve_person_stat = #{result}, approve_person_time = now()
+          </if>
+            ,error_reason = #{error_reason}
+        </set>
+
+        where file_id = #{fileId} and create_time = (select time from(select MAX(create_time) as time from file_approve where file_id = #{fileId}) as fat)
+    </update>
+    <select id="getProjectList" resultType="com.rky.pojo.Project">
+        select * from project where project_id in
+                              <foreach collection="projects" separator="," open="(" close=")" item="project">
+                                  #{project}
+                              </foreach>
+                              order by create_time
+    </select>
+    <select id="getHaveApprPro" resultType="com.rky.pojo.ApprovePerson">
+        select * from project_approve where (((person_1=#{personId})and (person_1_stat!=2))or ((person_2=#{personId})and(person_2_stat!=2))or ((person_3=#{personId})and(person_3_stat!=2))or ((person_4=#{personId})and person_4_stat!=2)or ((person_5=#{personId})and (person_5_stat!=2)))
+    </select>
+    <select id="getFileApprovePartById" resultType="com.rky.pojo.FileApprovePerson">
+            select * from file_approve where file_id = #{fileId} and create_time = (select time from(select MAX(create_time) as time from file_approve where file_id = #{fileId}) as fat)
+    </select>
+    <select id="getNeedtoApprFile" resultType="com.rky.pojo.Filee">
+        select * from filee where file_id in
+
+        <foreach collection="fileIdsList" separator="," open="(" close=")" item="fileid">
+            #{fileid}
+        </foreach>
+        and is_approve = 2
+    </select>
+
+
+    <insert id="setFileApprMember">
+        insert into file_approve (
+                                  file_id
+        <if test="proofPersonId!=0">,proof_person</if>
+        <if test="examinePersonId!=0">,examine_person</if>
+        <if test="approvePersonId!=0">,approve_person</if>
+        ,create_time,update_time
+        )
+        values
+            (
+             #{fileId}
+        <if test="proofPersonId!=0">,#{proofPersonId}</if>
+        <if test="examinePersonId!=0">,#{examinePersonId}</if>
+        <if test="approvePersonId!=0">,#{approvePersonId}</if>
+        ,now(),now()
+        )
+    </insert>
+
+
 </mapper>
